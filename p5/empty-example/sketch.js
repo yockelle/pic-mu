@@ -7,6 +7,7 @@ var fft;
 function setup() {
   // w = 800;
   // h = 600;
+    song = loadSound('songs/song1.mp3');
     w = document.getElementById('myContainer').clientWidth;
     h = w * 3 / 4;               // 4:3 camera aspect?
     myCanvas = createCanvas(w, h);
@@ -33,7 +34,7 @@ function draw() {
 
   imageMode(CENTER);
   image(capture, w/2, h/2, w, h);
-  filter(GRAY);
+  //filter(GRAY);
 
   capture.loadPixels();
   capture.get();
@@ -51,5 +52,15 @@ function draw() {
     osc.amp(amp);
   } else {
     console.log("holly shit")
+  }
+}
+
+function mousePressed() {
+  if ( song.isPlaying() ) { // .isPlaying() returns a boolean
+    song.stop();
+    //background(255,0,0);
+  } else {
+    song.play();
+    //background(0,255,0);
   }
 }

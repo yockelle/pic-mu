@@ -39,7 +39,7 @@ function draw() {
   capture.loadPixels();
   capture.get();
   var index = 0;
-  index = capture.pixels[Math.floor(mouseX + (mouseY * w * 4)) * d];
+  index = capture.pixels[Math.floor(mouseX + (mouseY * w/2 * 4)) * d];
   console.log(Math.floor(mouseX + (mouseY * w * 4)) * d);
   console.log(index);
 

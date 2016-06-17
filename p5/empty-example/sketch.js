@@ -10,6 +10,11 @@ function setup() {
   // w = 800;
   // h = 600;
     song = loadSound('songs/song1.mp3');
+    song2 = loadSound('songs/blue_tit.mp3');
+    song3 = loadSound('songs/bullfinch.mp3');
+    song4 = loadSound('songs/great_tit.mp3');
+    song5 = loadSound('songs/tawny_owl.mp3');
+
     w = document.getElementById('myContainer').clientWidth;
     h = w * 3 / 4;               // 4:3 camera aspect?
     myCanvas = createCanvas(w, h);
@@ -37,7 +42,7 @@ function draw() {
     var d = pixelDensity();
 
     image(capture, offsetX, offsetY);
-    //filter(GRAY);
+    filter(GRAY);
 
     // capture.loadPixels();
 
@@ -71,7 +76,7 @@ function mousePressed() {
   capture.loadPixels();
 
   var c = capture.get(mouseX-offsetX,mouseY-offsetY);
-  
+
   console.log(c);
 
   // console.log('kurfa');
@@ -85,13 +90,13 @@ function mousePressed() {
 
   // var d = pixelDensity();
 
-  // var off = ( x + (y * w/2 * 4)) * d; 
+  // var off = ( x + (y * w/2 * 4)) * d;
 
-  // var grabd = [pixels[off], pixels[off+1], pixels[off+2], pixels[off+3]]; 
+  // var grabd = [pixels[off], pixels[off+1], pixels[off+2], pixels[off+3]];
 
   // console.log(grabd);
 
-  
+
   if ( song.isPlaying() ) { // .isPlaying() returns a boolean
     song.stop();
 

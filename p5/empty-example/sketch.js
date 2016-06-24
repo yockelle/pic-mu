@@ -28,9 +28,14 @@ function setup() {
     frameRate(10);
 
     // osc = new p5.TriOsc(); // set frequency and type
-    osc = new p5.Oscillator();
+    // osc = new p5.Oscillator();
+
+    osc = new p5.SinOsc() // create new oscilator
+
     osc.setType('sine');
-    osc.amp(.5);
+
+    // osc.freq(freq); // apply freq
+    // osc.amp(.5);
 
     fft = new p5.FFT();
     osc.start();
@@ -52,16 +57,57 @@ function draw() {
     // var c = capture.get(50,90);
     // console.log(c);
 
-  index = capture.pixels[Math.floor(mouseX + (mouseY * w/2 * 4)) * d];
-  console.log(Math.floor(mouseX + (mouseY * w * 4)) * d);
+  index = capture.pixels[Math.floor((mouseX - offsetX) + ((mouseY-offsetY) * w/2 * 4)) * d];
+  // console.log(Math.floor(mouseX + (mouseY * w * 4)) * d);
   console.log(index);
+  console.log('mouse' + (mouseX - offsetX) + (mouseY-offsetY));
+
+  // freq = midiToFreq(60) // var to hold freq
 
   // change oscillator frequency based on index value
     if (index !== undefined) {
-      var freq = map(index, 0, 255, 40, 880);
+
+      if( index > 0 && index < 38 ){
+         // midi = 60;
+        //C4
+        freq = 261.63;
+      }
+      else if( index > 51 && index < 102){
+         // midi = 62;
+        //D4
+        freq = 293.67;
+      }
+      else if( index > 153 && index < 179){
+         // midi = 64;
+        //E4
+        freq = 329.63;
+      }
+      else if( index > 191 && index < 204){
+         // midi = 67;
+        //F4
+        freq = 349.23;
+      }
+      else if( index > 217 && index < 230){
+         // midi = 67;
+        //G4
+        freq = 392;
+      }
+      else if( index > 230){
+        // midi = 69;
+        //A4
+        freq = 440;
+      }
+      // else if( index > 189 && index < 210){
+      //   freq = 70;
+      // }
+      // else if( index > 210){
+      //   freq = 72;
+      // }
+
+      // var freq = map(index, 0, 255, 261, 415);
       osc.freq(freq);
 
-      var amp = map(index, 0, 255, 1, .01);
+      var amp = map(index, 0, 255, 1, 0.2);
       osc.amp(amp);
   } else {
     console.log("holly shit");
@@ -76,7 +122,6 @@ function draw() {
 
 //   console.log(c);
 
-//   // console.log('kurfa');
 
 //   // capture.loadPixels();
 
@@ -87,11 +132,6 @@ function draw() {
 
 //   // var d = pixelDensity();
 
-//   // var off = ( x + (y * w/2 * 4)) * d;
-
-//   // var grabd = [pixels[off], pixels[off+1], pixels[off+2], pixels[off+3]];
-
-//   // console.log(grabd);
 
 
 //   if ( song.isPlaying() ) { // .isPlaying() returns a boolean
